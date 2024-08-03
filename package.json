@@ -1,0 +1,23 @@
+{
+  "name": "litmd",
+  "version": "1.0.0",
+  "description": "ソフトウェアのドキュメント作成とプログラミングを単一のマークダウンコードで行えるツール",
+  "main": "dist/index.mjs",
+  "bin": "dist/main.mjs",
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "gen-index-html": "markdown-to-html --output index.html"
+  },
+  "keywords": [],
+  "author": "hota1024",
+  "license": "ISC",
+  "dependencies": {
+    "marked": "^13.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.1.0",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4"
+  }
+}

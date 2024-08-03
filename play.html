@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="./dist/browser.global.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/monaco-editor@0.50.0/min/vs/editor/editor.main.min.css"
+      rel="stylesheet"
+    />
+    <title>litmd playground</title>
+
+    <style>
+      #preview {
+        color: #202020;
+      }
+
+      #preview h1 {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      #preview h2 {
+        font-size: 1.6rem;
+        font-weight: bold;
+      }
+      #preview h3 {
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+      #preview h4 {
+        font-size: 1rem;
+        font-weight: bold;
+      }
+      #preview h5 {
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+      #preview h6 {
+        font-size: 0.6rem;
+        font-weight: bold;
+      }
+
+      #preview pre {
+        background: #101010;
+        color: white;
+        padding: 0.7rem;
+        border-radius: 8px;
+      }
+
+      #preview ul {
+        list-style-type: disc;
+        margin-left: 1.5rem;
+      }
+      #preview ol {
+        list-style-type: decimal;
+        margin-left: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="h-[48px] bg-slate-900 text-white p-4 flex items-center gap-2">
+        <div class="font-bold">litmd playground</div>
+        <div class="flex-1"></div>
+        <a
+          href="https://github.com/hota1024/litmd"
+          target="_blank"
+          class="min-w-[80px] bg-gray-500 hover:bg-gray-700 transition px-4 py-1 rounded-md"
+          >GitHub</a
+        >
+        <button
+          id="run-btn"
+          class="min-w-[80px] bg-green-500 hover:bg-green-700 transition px-4 py-1 rounded-md"
+        >
+          Run
+        </button>
+      </nav>
+    </header>
+    <main class="h-[calc(100dvh-48px)] flex">
+      <div id="editor" class="w-full h-full"></div>
+      <div id="preview" class="w-full max-h-[calc(100dvh-48px)] overflow-auto pb-8 px-4"></div>
+    </main>
+
+    <script type="module">
+      import * as monaco from "https://cdn.jsdelivr.net/npm/monaco-editor@0.50.0/+esm";
+      import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+
+      const editorEl = document.querySelector("#editor");
+      const previewEl = document.querySelector("#preview");
+      const runBtnEl = document.querySelector("#run-btn");
+
+      const code = await fetch("./examples/prime_numbers.md").then(r => r.text());
+
+      const editor = monaco.editor.create(editorEl, {
+        language: "markdown",
+        wordWrap: true,
+        value: code,
+      });
+      editor.getModel().onDidChangeContent((event) => {
+        updatePreview();
+      });
+
+      function updatePreview() {
+        const value = editor.getValue();
+        const html = marked(value);
+        previewEl.innerHTML = html;
+      }
+
+      updatePreview();
+
+      runBtnEl.addEventListener("click", () => {
+        const code = editor.getValue();
+        const js = litmd(code);
+        eval(js);
+      });
+    </script>
+  </body>
+</html>

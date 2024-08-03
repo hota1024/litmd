@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "bin": "dist/main.js",
   "type": "module",
+  "private": false,
   "scripts": {
     "build": "tsup",
     "gen-index-html": "markdown-to-html --output index.html"

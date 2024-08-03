@@ -1,5 +1,5 @@
 {
-  "name": "litmd",
+  "name": "@hota1024/litmd",
   "version": "1.0.0",
   "description": "ソフトウェアのドキュメント作成とプログラミングを単一のマークダウンコードで行えるツール",
   "main": "dist/index.js",

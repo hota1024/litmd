@@ -2,8 +2,8 @@
   "name": "litmd",
   "version": "1.0.0",
   "description": "ソフトウェアのドキュメント作成とプログラミングを単一のマークダウンコードで行えるツール",
-  "main": "dist/index.mjs",
-  "bin": "dist/main.mjs",
+  "main": "dist/index.js",
+  "bin": "dist/main.js",
   "type": "module",
   "scripts": {
     "build": "tsup",

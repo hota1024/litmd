@@ -1,9 +1,11 @@
 {
   "name": "@hota1024/litmd",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ソフトウェアのドキュメント作成とプログラミングを単一のマークダウンコードで行えるツール",
   "main": "dist/index.js",
-  "bin": "dist/main.js",
+  "bin": {
+    "litmd": "dist/main.js"
+  },
   "type": "module",
   "private": false,
   "scripts": {
